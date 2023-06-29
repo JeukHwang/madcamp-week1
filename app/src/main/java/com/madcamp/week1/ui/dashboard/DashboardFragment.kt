@@ -1,15 +1,24 @@
 package com.madcamp.week1.ui.dashboard
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.graphics.ImageDecoder
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.madcamp.week1.databinding.FragmentDashboardBinding
 import com.madcamp.week1.R
+import com.madcamp.week1.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
 
@@ -18,7 +27,9 @@ class DashboardFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var getResult: ActivityResultLauncher<Intent>
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,17 +45,34 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-        val textView2: TextView = binding.textDashboard2
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView2.text = it
-        }
 
-        val imageButton: ImageButton = binding.imageButton
-        imageButton.setOnClickListener {
-            activity?.runOnUiThread {
-                textView2.text = getString(R.string.dashboard_text_2)
+        val imageView: ImageView = binding.imageView
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                activity?.runOnUiThread {
+                    textView.text = getString(R.string.dashboard_success)
+                }
+                val photoUri = it.data?.data!!
+                Toast.makeText(activity, photoUri.toString(), Toast.LENGTH_SHORT).show()
+                try {
+                    val source: ImageDecoder.Source =
+                        ImageDecoder.createSource(this.requireContext().contentResolver, photoUri)
+                    val bitmap = ImageDecoder.decodeBitmap(source)
+                    imageView.setImageBitmap(bitmap)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else {
+                textView.text = getString(R.string.dashboard_failure)
             }
         }
+        val imageButton: ImageButton = binding.imageButton
+        imageButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            getResult.launch(intent)
+        }
+
         return root
     }
 
