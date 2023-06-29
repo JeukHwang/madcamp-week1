@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.madcamp.week1.databinding.FragmentDashboardBinding
+import com.madcamp.week1.R
 
 class DashboardFragment : Fragment() {
 
@@ -31,6 +33,17 @@ class DashboardFragment : Fragment() {
         val textView: TextView = binding.textDashboard
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
+        }
+        val textView2: TextView = binding.textDashboard2
+        dashboardViewModel.text.observe(viewLifecycleOwner) {
+            textView2.text = it
+        }
+
+        val imageButton: ImageButton = binding.imageButton
+        imageButton.setOnClickListener {
+            activity?.runOnUiThread {
+                textView2.text = getString(R.string.dashboard_text_2)
+            }
         }
         return root
     }

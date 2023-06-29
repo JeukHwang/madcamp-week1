@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="dashboard_text">This is dashboard v2</string>
+    <string name="dashboard_text_2">This will be changed by button</string>
+    <string name="dashboard_text_2_changed">Wow! This text is changed by image button</string>
 </resources>
