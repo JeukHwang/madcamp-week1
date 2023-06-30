@@ -38,16 +38,16 @@ class MainRvAdapter(val context: Context, val addList: ArrayList<Info>) :
         val userUrl = itemView?.findViewById<TextView>(R.id.userUrlTv)
         val userEmail = itemView?.findViewById<TextView>(R.id.userEmailTv)
 
-        fun bind (dog: Dog, context: Context) {
-            if (dog.photo != "") {
-                val resourceId = context.resources.getIdentifier(dog.photo, "drawable", context.packageName)
-                dogPhoto?.setImageResource(resourceId)
+        fun bind (info: Info, context: Context) {
+            if (info.photo != "") {
+                val resourceId = context.resources.getIdentifier(info.photo, "drawable", context.packageName)
+                userPhoto?.setImageResource(resourceId)
             } else {
-                dogPhoto?.setImageResource(R.mipmap.ic_launcher)
+                userPhoto?.setImageResource(R.mipmap.ic_launcher)
             }
-            dogBreed?.text = dog.breed
-            dogAge?.text = dog.age
-            dogGender?.text = dog.gender
+            userLogin?.text = info.login
+            userUrl?.text = info.github_url
+            userEmail?.text = info.email
         }
     }
 }
