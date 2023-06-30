@@ -1,4 +1,4 @@
-package com.madcamp.week1.ui.dashboard.api
+package com.madcamp.week1.ui.notifications.api
 
 data class GithubUserData(
     val avatar_url: String?,

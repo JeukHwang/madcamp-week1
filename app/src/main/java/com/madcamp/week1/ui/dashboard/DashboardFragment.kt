@@ -20,11 +20,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentDashboardBinding
-import com.madcamp.week1.ui.dashboard.api.ApiObject
-import com.madcamp.week1.ui.dashboard.api.GithubUserData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class DashboardFragment : Fragment() {
@@ -35,35 +30,6 @@ class DashboardFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var getResult: ActivityResultLauncher<Intent>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val call = ApiObject.getRetrofitService.getGithubUser()
-        call.enqueue(object : Callback<GithubUserData> {
-            override fun onResponse(
-                call: Call<GithubUserData>,
-                response: Response<GithubUserData>
-            ) {
-                Toast.makeText(
-                    this@DashboardFragment.requireContext(),
-                    "Call Success",
-                    Toast.LENGTH_SHORT
-                ).show()
-                if (response.isSuccessful) {
-                    val githubUser = response.body() ?: {}
-                    Log.i("API", githubUser.toString())
-                }
-            }
-
-            override fun onFailure(call: Call<GithubUserData>, t: Throwable) {
-                Toast.makeText(
-                    this@DashboardFragment.requireContext(),
-                    "Call Failed",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
-    }
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreateView(

@@ -1,4 +1,4 @@
-package com.madcamp.week1.ui.dashboard.api
+package com.madcamp.week1.ui.notifications.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
