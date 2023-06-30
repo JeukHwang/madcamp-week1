@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentDashboardBinding
+import com.madcamp.week1.ui.dashboard.api.ApiObject
+import com.madcamp.week1.ui.dashboard.api.GithubUserData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,21 +38,24 @@ class DashboardFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val call = ApiObject.getRetrofitService.getCoinAll()
-        call.enqueue(object : Callback<List<Coin>> {
-            override fun onResponse(call: Call<List<Coin>>, response: Response<List<Coin>>) {
+        val call = ApiObject.getRetrofitService.getGithubUser()
+        call.enqueue(object : Callback<GithubUserData> {
+            override fun onResponse(
+                call: Call<GithubUserData>,
+                response: Response<GithubUserData>
+            ) {
                 Toast.makeText(
                     this@DashboardFragment.requireContext(),
                     "Call Success",
                     Toast.LENGTH_SHORT
                 ).show()
                 if (response.isSuccessful) {
-                    val coinList = response.body() ?: listOf()
-                    Log.i("API", coinList.toString())
+                    val githubUser = response.body() ?: {}
+                    Log.i("API", githubUser.toString())
                 }
             }
 
-            override fun onFailure(call: Call<List<Coin>>, t: Throwable) {
+            override fun onFailure(call: Call<GithubUserData>, t: Throwable) {
                 Toast.makeText(
                     this@DashboardFragment.requireContext(),
                     "Call Failed",
@@ -58,14 +63,6 @@ class DashboardFragment : Fragment() {
                 ).show()
             }
         })
-//        var resultText = null
-//        try {
-//            resultText = Task().execute().get()
-//        } catch (e: InterruptedException) {
-//            e.printStackTrace()
-//        } catch (e: ExecutionException) {
-//            e.printStackTrace()
-//        }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
