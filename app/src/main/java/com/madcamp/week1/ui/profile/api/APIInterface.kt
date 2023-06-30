@@ -1,4 +1,4 @@
-package com.madcamp.week1.ui.notifications.api
+package com.madcamp.week1.ui.profile.api
 
 import retrofit2.Call
 import retrofit2.http.GET

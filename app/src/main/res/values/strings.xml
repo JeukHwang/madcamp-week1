@@ -2,11 +2,11 @@
     <string name="app_name">Week1</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
     <string name="dashboard_text">This is dashboard v2</string>
     <string name="dashboard_text_2">This will be changed by button</string>
     <string name="dashboard_text_2_changed">Wow! This text is changed by image button</string>
     <string name="dashboard_success">Success</string>
     <string name="dashboard_failure">Failure</string>
-    <string name="notifications_edittext_github_id">Your Github ID</string>
+    <string name="profile_edittext_text">Your Github ID</string>
 </resources>
