@@ -1,13 +1,13 @@
 package com.madcamp.week1
 
 import android.content.Context
-import android.provider.ContactsContract
 import androidx.recyclerview.widget.RecyclerView // import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.madcamp.week1.ui.home.HomeFragment
 
 class MainRvAdapter(val context: Context, val addList: ArrayList<Info>) :
     RecyclerView.Adapter<MainRvAdapter.Holder>() {
@@ -40,6 +40,8 @@ class MainRvAdapter(val context: Context, val addList: ArrayList<Info>) :
 
         fun bind (info: Info, context: Context) {
             if (info.photo != "") {
+                //Log.i("INFO_PHOTO", info.photo.toString())
+                //userPhoto?.load(info.photo)
                 val resourceId = context.resources.getIdentifier(info.photo, "drawable", context.packageName)
                 userPhoto?.setImageResource(resourceId)
             } else {
