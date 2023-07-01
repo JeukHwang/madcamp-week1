@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import coil.load
 import com.madcamp.week1.ui.home.HomeFragment
 
 class MainRvAdapter(val context: Context, val addList: ArrayList<Info>) :
@@ -40,10 +41,7 @@ class MainRvAdapter(val context: Context, val addList: ArrayList<Info>) :
 
         fun bind (info: Info, context: Context) {
             if (info.photo != "") {
-                //Log.i("INFO_PHOTO", info.photo.toString())
-                //userPhoto?.load(info.photo)
-                val resourceId = context.resources.getIdentifier(info.photo, "drawable", context.packageName)
-                userPhoto?.setImageResource(resourceId)
+                userPhoto?.load(info.photo) // url로 가져오기
             } else {
                 userPhoto?.setImageResource(R.mipmap.ic_launcher)
             }
