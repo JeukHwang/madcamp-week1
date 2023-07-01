@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.madcamp.week1.databinding.FragmentDashboardBinding
 
 
@@ -37,6 +38,24 @@ class DashboardFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val listData = arrayListOf(
+            "Title 1",
+            "Title 2",
+            "Title 3",
+            "Title 4",
+            "Title 5",
+            "Title 6",
+            "Title 7",
+            "Title 8"
+        )
+        val listManager = GridLayoutManager(this.context, 3)
+        val listAdapter = GridAdapter(listData)
+        val recyclerList = binding.recylcerViewGallery.apply {
+            setHasFixedSize(true)
+            layoutManager = listManager
+            adapter = listAdapter
+        }
 
         val imageView: ImageView = binding.imageView
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
