@@ -35,7 +35,7 @@ class MainRvAdapter(val context: Context, val addList: ArrayList<Info>) :
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val userPhoto = itemView?.findViewById<ImageView>(R.id.userPhotoImg)
-        val userLogin = itemView?.findViewById<TextView>(R.id.userLoginTv)
+        val userId = itemView?.findViewById<TextView>(R.id.userLoginTv)
         val userUrl = itemView?.findViewById<TextView>(R.id.userUrlTv)
         val userEmail = itemView?.findViewById<TextView>(R.id.userEmailTv)
 
@@ -45,7 +45,7 @@ class MainRvAdapter(val context: Context, val addList: ArrayList<Info>) :
             } else {
                 userPhoto?.setImageResource(R.mipmap.ic_launcher)
             }
-            userLogin?.text = info.login
+            userId?.text = info.id
             userUrl?.text = info.github_url
             userEmail?.text = info.email
         }
