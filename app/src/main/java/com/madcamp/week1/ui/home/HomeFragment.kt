@@ -24,8 +24,8 @@ class HomeFragment : Fragment() {
         Info("Lee", "https://github.com/lee", "email_lee", "https://avatars.githubusercontent.com/u/2014?v=4"),
         Info("Park", "https://github.com/park", "email_park", "https://avatars.githubusercontent.com/u/135650?v=4"),
         Info("Choi", "https://github.com/choi", "email_choi", "https://avatars.githubusercontent.com/u/10793473?v=4"),
-        Info("Lim", "https://github.com/lim", "email_lulu", "https://avatars.githubusercontent.com/u/54672474?v=4"),
-        Info("Lulu", "https://github.com/lulu", "email_lim", "https://avatars.githubusercontent.com/u/7571747?v=4"),
+        Info("Lim", "https://github.com/lim", "email_lim", "https://avatars.githubusercontent.com/u/7571747?v=4"),
+        Info("Lulu", "https://github.com/lulu", "email_lulu", "https://avatars.githubusercontent.com/u/54672474?v=4"),
         Info("Lala", "https://github.com/lala", "email_lala", "https://avatars.githubusercontent.com/u/106092?v=4"),
         Info("Sookmyung", "https://github.com/Sookmyung", "email_sookmyung", "https://avatars.githubusercontent.com/u/18757873?v=4"),
         Info("Kaist", "https://github.com/kaist", "email_kaist", "https://avatars.githubusercontent.com/u/18757873?v=4"),
@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var mRecyclerView: RecyclerView // 기존의 HomeActivity.kt에서 추가
+    private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
