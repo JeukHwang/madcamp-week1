@@ -11,14 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentDashboardBinding
 
 
@@ -38,23 +35,12 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
 
         val imageView: ImageView = binding.imageView
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                activity?.runOnUiThread {
-                    textView.text = getString(R.string.dashboard_success)
-                }
                 val photoUri = it.data?.data!!
                 Log.i("PHOTO_URI", photoUri.toString())
                 Toast.makeText(activity, photoUri.toString(), Toast.LENGTH_SHORT).show()
@@ -66,8 +52,6 @@ class DashboardFragment : Fragment() {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-            } else {
-                textView.text = getString(R.string.dashboard_failure)
             }
         }
         val imageButton: ImageButton = binding.imageButton
