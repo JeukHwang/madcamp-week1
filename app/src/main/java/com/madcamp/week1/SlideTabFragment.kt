@@ -22,15 +22,28 @@ class SlideTabFragment : Fragment() {
   ): View {
     binding = FragmentSlideTabBinding.inflate(inflater, container, false)
 
-    val tabLayout = binding.tabLayout
-    tabLayout.addTab(tabLayout.newTab().setText("1"))
-    tabLayout.addTab(tabLayout.newTab().setText("2"))
-
     viewPager = binding.viewPager
-    viewPager.adapter = ScreenSliderPagerAdapter(this)
-    TabLayoutMediator(tabLayout, viewPager) { tab, position -> tab.text = "OBJECT ${(position+1)}" }
+    val pagerAdapter = ScreenSliderPagerAdapter(this)
+    pagerAdapter.addTabInfo(
+        ContactsFragment(), "Contacts", R.drawable.baseline_perm_contact_calendar_24)
+    pagerAdapter.addTabInfo(GalleryFragment(), "Gallery", R.drawable.baseline_insert_photo_24)
+    pagerAdapter.addTabInfo(ProfileFragment(), "Profile", R.drawable.baseline_person_24)
+    viewPager.adapter = pagerAdapter
+
+    val tabLayout = binding.tabLayout
+    for (i in 1..pagerAdapter.itemCount) {
+      tabLayout.addTab(tabLayout.newTab())
+    }
+    // https://developer.android.com/guide/navigation/navigation-swipe-view-2?hl=ko
+    TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+          val (_, title, icon) = pagerAdapter.getTabInfo(position)
+          tab.text = title
+          tab.setIcon(icon)
+        }
         .attach()
 
+    // Custom onBackPressed
+    // https://developer.android.com/guide/navigation/navigation-custom-back?hl=ko
     val callback =
         object : OnBackPressedCallback(true) {
           override fun handleOnBackPressed() {
@@ -50,14 +63,22 @@ class SlideTabFragment : Fragment() {
   }
 
   inner class ScreenSliderPagerAdapter(fm: Fragment) : FragmentStateAdapter(fm) {
-    var fragments: MutableList<Fragment> = arrayListOf(GalleryFragment(), ProfileFragment())
+    private var data: MutableList<Triple<Fragment, String, Int>> = arrayListOf()
+
+    fun addTabInfo(fragment: Fragment, title: String, icon: Int) {
+      data.add(Triple(fragment, title, icon))
+    }
+
+    fun getTabInfo(position: Int): Triple<Fragment, String, Int> {
+      return data[position]
+    }
 
     override fun getItemCount(): Int {
-      return fragments.size
+      return data.size
     }
 
     override fun createFragment(position: Int): Fragment {
-      return fragments[position]
+      return data[position].first
     }
   }
 }
