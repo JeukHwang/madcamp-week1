@@ -1,5 +1,6 @@
 package com.madcamp.week1.gallery
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.madcamp.week1.GalleryDetailActivity
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentImageGridBinding
 
@@ -29,6 +33,18 @@ class ImageGridFragment : Fragment() {
       adapter = GridAdapter()
     }
     return binding.root
+  }
+
+  fun onItemClick(item: GridItem, imageView: ImageView, textView: TextView) {
+    val intent = Intent(requireContext(), GalleryDetailActivity::class.java)
+
+    val imageViewPair = Pair<View, String>(imageView, getString(R.string.image_transition_name))
+    val textViewPair = Pair<View, String>(textView, getString(R.string.text_transition_name))
+    val options =
+        ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this.requireActivity(), imageViewPair, textViewPair)
+    intent.putExtra(GalleryDetailActivity.DATA, item)
+    startActivity(intent, options.toBundle())
   }
 
   inner class GridAdapter : RecyclerView.Adapter<GridAdapter.ViewHolder>() {
@@ -53,12 +69,13 @@ class ImageGridFragment : Fragment() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
       val gridItem = GridItem.getData(position)
       viewHolder.imageView.load(gridItem.photoUrl) { crossfade(true) }
-      viewHolder.imageView.setOnClickListener {
+      viewHolder.itemView.setOnClickListener {
         Toast.makeText(
                 this@ImageGridFragment.requireContext(),
                 "${gridItem.title} at position $position is clicked!",
                 Toast.LENGTH_SHORT)
             .show()
+        onItemClick(gridItem, viewHolder.imageView, viewHolder.textView)
       }
     }
 

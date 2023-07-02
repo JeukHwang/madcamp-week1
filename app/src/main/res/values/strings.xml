@@ -3,4 +3,6 @@
     <string name="profile_fragment">Profile Fragment</string>
     <string name="gallery_fragment">Gallery Fragment</string>
     <string name="contacts_fragment">Contacts Fragment</string>
+    <string name="image_transition_name">image_transition_name</string>
+    <string name="text_transition_name">text_transition_name</string>
 </resources>
