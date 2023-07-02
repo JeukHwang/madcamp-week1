@@ -24,6 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GalleryDetailActivity" />
+        <activity android:name=".gallery.GalleryDetailActivity" />
     </application>
 </manifest>

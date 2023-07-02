@@ -48,8 +48,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Image Loader
-    implementation('io.coil-kt:coil:2.4.0')
+    implementation 'io.coil-kt:coil:2.4.0'
 
     //
-    implementation "androidx.constraintlayout:constraintlayout"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

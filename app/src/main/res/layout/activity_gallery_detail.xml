@@ -6,23 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GalleryDetailActivity">
+    tools:context=".gallery.GalleryDetailActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/slide_tab_container"
         android:name="com.madcamp.week1.SlideTabFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black" />
+        android:background="#888888" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/ic_launcher_foreground"
         android:transitionName="@string/image_transition_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/slide_tab_container"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/slide_tab_container" />
+        app:layout_constraintTop_toTopOf="@+id/slide_tab_container"
+        app:layout_constraintVertical_bias="1.0"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="118dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="92dp"
+        android:text="Lorem Ipsum"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/slide_tab_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

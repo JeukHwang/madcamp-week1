@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.madcamp.week1.GalleryDetailActivity
+import coil.transform.RoundedCornersTransformation
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentImageGridBinding
 
@@ -43,7 +43,8 @@ class ImageGridFragment : Fragment() {
     val options =
         ActivityOptionsCompat.makeSceneTransitionAnimation(
             this.requireActivity(), imageViewPair, textViewPair)
-    intent.putExtra(GalleryDetailActivity.DATA, item)
+    intent.putExtra(GalleryDetailActivity.extraTitle, item.title)
+    intent.putExtra(GalleryDetailActivity.extraPhotoUrl, item.photoUrl)
     startActivity(intent, options.toBundle())
   }
 
@@ -68,7 +69,12 @@ class ImageGridFragment : Fragment() {
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
       val gridItem = GridItem.getData(position)
-      viewHolder.imageView.load(gridItem.photoUrl) { crossfade(true) }
+      viewHolder.imageView.load(gridItem.photoUrl) {
+        placeholder(R.drawable.baseline_downloading_24)
+        error(R.drawable.baseline_error_outline_24)
+        transformations(RoundedCornersTransformation(40F))
+        crossfade(true)
+      }
       viewHolder.itemView.setOnClickListener {
         Toast.makeText(
                 this@ImageGridFragment.requireContext(),

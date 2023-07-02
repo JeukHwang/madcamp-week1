@@ -1,35 +1,35 @@
-package com.madcamp.week1
+package com.madcamp.week1.gallery
 
-import android.os.Build
 import android.os.Bundle
 import android.transition.Transition
 import android.view.MenuItem
 import androidx.fragment.app.FragmentActivity
-import coil.load
+import com.madcamp.week1.R
 import com.madcamp.week1.databinding.ActivityGalleryDetailBinding
-import com.madcamp.week1.gallery.GridItem
 
 class GalleryDetailActivity : FragmentActivity() {
   companion object {
-    const val DATA = "data"
+    const val extraTitle: String = "title"
+    const val extraPhotoUrl = "photoUrl"
   }
 
   private lateinit var binding: ActivityGalleryDetailBinding
-  private lateinit var item: GridItem
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityGalleryDetailBinding.inflate(layoutInflater)
     setContentView(R.layout.activity_gallery_detail)
-    item =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-          intent.getParcelableExtra(DATA, GridItem::class.java)!!
-        } else {
-          intent.extras?.get(DATA) as GridItem
-        }
+    //    val title = intent.getStringExtra(extraTitle)
+    //    val photoUrl = intent.getStringExtra(extraPhotoUrl)
+    //    this@GalleryDetailActivity.runOnUiThread { binding.textView.text = title }
+
+    //    binding.imageView.load(R.drawable.baseline_perm_contact_calendar_24) {
+    //      placeholder(R.drawable.baseline_perm_contact_calendar_24)
+    //      error(R.drawable.baseline_perm_contact_calendar_24)
+    //      crossfade(true)
+    //    }
     window.sharedElementEnterTransition.addListener(
         object : Transition.TransitionListener {
           override fun onTransitionEnd(transition: Transition?) {
-            binding.imageView.load(item.photoUrl)
             transition?.removeListener(this)
           }
 
