@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/ic_launcher_background"
+        android:transitionName="@string/image_transition_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/slide_tab_container"
         app:layout_constraintStart_toStartOf="parent"

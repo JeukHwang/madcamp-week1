@@ -49,6 +49,9 @@ class GridItem(private val url: String, val title: String) : Parcelable {
       get() = dataset.size
   }
 
+  val id: Int
+    get() = url.hashCode() + title.hashCode()
+
   val photoUrl: String
     get() = baseUrl + url
 }
