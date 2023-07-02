@@ -63,7 +63,7 @@ class SlideTabFragment : Fragment() {
   }
 
   inner class ScreenSliderPagerAdapter(fm: Fragment) : FragmentStateAdapter(fm) {
-    private var data: MutableList<Triple<Fragment, String, Int>> = arrayListOf()
+    private var data: ArrayList<Triple<Fragment, String, Int>> = ArrayList()
 
     fun addTabInfo(fragment: Fragment, title: String, icon: Int) {
       data.add(Triple(fragment, title, icon))
