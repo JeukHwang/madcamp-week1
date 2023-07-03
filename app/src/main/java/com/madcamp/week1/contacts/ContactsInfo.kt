@@ -1,6 +1,11 @@
 package com.madcamp.week1.contacts
 
-class ContactsInfo(val id: String, val github_url: String, val email: String, val photo: String) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class ContactsInfo(val id: String, val github_url: String, val email: String, val photo: String) :
+    Parcelable {
   companion object {
     val dataset =
         arrayListOf(
