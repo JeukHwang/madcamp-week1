@@ -7,16 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentContactsGridBinding
-import com.madcamp.week1.gallery.GalleryDetailActivity
-import com.madcamp.week1.gallery.GridItem
 
 class ContactsGridFragment : Fragment() {
 
@@ -34,19 +30,6 @@ class ContactsGridFragment : Fragment() {
       adapter = GridAdapter()
     }
     return binding.root
-  }
-
-  fun onItemClick(item: GridItem, imageView: ImageView, textView: TextView) {
-    val intent = Intent(requireContext(), ContactsDetailActivity::class.java)
-
-    val imageViewPair = Pair<View, String>(imageView, getString(R.string.image_transition_name))
-    val textViewPair = Pair<View, String>(textView, getString(R.string.text_transition_name))
-    val options =
-      ActivityOptionsCompat.makeSceneTransitionAnimation(
-        this.requireActivity(), imageViewPair, textViewPair)
-    intent.putExtra(GalleryDetailActivity.extraTitle, item.title)
-    intent.putExtra(GalleryDetailActivity.extraPhotoUrl, item.photoUrl)
-    startActivity(intent, options.toBundle())
   }
 
   inner class GridAdapter : RecyclerView.Adapter<GridAdapter.ViewHolder>() {
@@ -78,9 +61,13 @@ class ContactsGridFragment : Fragment() {
 
         // 추가
         itemView.setOnClickListener {
-          val intent = Intent(context, ContactsDetailActivity::class.java)
-          intent.putExtra("data", info.github_url)
-          intent.run { context.startActivity(this) }
+          var intent = Intent(this.context, ContactsDetailActivity::class.java)
+          var bundle = Bundle()
+          // bundle = intent.getBundleExtra("bundle")
+          bundle.putString("info_id", info.id)
+          bundle.putString("info_email", info.email)
+          intent.putExtra("bundle_key", bundle)
+          startActivity(intent)
         }
       }
     }
