@@ -85,7 +85,7 @@ class ContactsGridFragment : Fragment() {
 
         // 추가
         itemView.setOnClickListener {
-          val intent = Intent(context, com.madcamp.week1.MainActivity::class.java)
+          val intent = Intent(context, ContactsDetailActivity::class.java)
           intent.putExtra("data", info.githubId)
           intent.run { context.startActivity(this) }
         }
