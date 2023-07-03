@@ -1,5 +1,6 @@
 package com.madcamp.week1.contacts
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentContactsGridBinding
+import com.madcamp.week1.gallery.GalleryDetailActivity
+import com.madcamp.week1.gallery.GridItem
 import com.madcamp.week1.profile.ServerApiClass
 import com.madcamp.week1.profile.UserProfile
 import retrofit2.Call
@@ -39,6 +44,19 @@ class ContactsGridFragment : Fragment() {
     return binding.root
   }
 
+  fun onItemClick(item: GridItem, imageView: ImageView, textView: TextView) {
+    val intent = Intent(requireContext(), ContactsDetailActivity::class.java)
+
+    val imageViewPair = Pair<View, String>(imageView, getString(R.string.image_transition_name))
+    val textViewPair = Pair<View, String>(textView, getString(R.string.text_transition_name))
+    val options =
+        ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this.requireActivity(), imageViewPair, textViewPair)
+    intent.putExtra(GalleryDetailActivity.extraTitle, item.title)
+    intent.putExtra(GalleryDetailActivity.extraPhotoUrl, item.photoUrl)
+    startActivity(intent, options.toBundle())
+  }
+
   inner class GridAdapter : RecyclerView.Adapter<GridAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -46,6 +64,7 @@ class ContactsGridFragment : Fragment() {
       private val userId: TextView
       private val userUrl: TextView
       private val userEmail: TextView
+      private val context = binding.root.context // 추가
 
       init {
         userPhoto = view.findViewById(R.id.userPhotoImg)
@@ -63,6 +82,13 @@ class ContactsGridFragment : Fragment() {
         userId.text = info.id
         userUrl.text = info.githubId
         userEmail.text = info.email
+
+        // 추가
+        itemView.setOnClickListener {
+          val intent = Intent(context, com.madcamp.week1.MainActivity::class.java)
+          intent.putExtra("data", info.githubId)
+          intent.run { context.startActivity(this) }
+        }
       }
     }
 
