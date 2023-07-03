@@ -13,6 +13,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo</item>
+        <item name="fontFamily">@font/spoqa_han_sans_neo</item>
+
         <!-- Original AppCompat attributes. -->
         <!--
         <item name="colorPrimary">@color/my_app_primary</item>
