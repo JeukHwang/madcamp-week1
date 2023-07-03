@@ -40,7 +40,7 @@ class ContactsGridFragment : Fragment() {
       private val userUrl: TextView
       private val userEmail: TextView
 
-      private val context = binding.root.context // 추가
+      private val context = binding.root.context
 
       init {
         userPhoto = view.findViewById(R.id.userPhotoImg)
@@ -59,11 +59,11 @@ class ContactsGridFragment : Fragment() {
         userUrl.text = info.github_url
         userEmail.text = info.email
 
-        // 추가
         itemView.setOnClickListener {
           var intent = Intent(this.context, ContactsDetailActivity::class.java)
           var bundle = Bundle()
-          // bundle = intent.getBundleExtra("bundle")
+
+          bundle.putString("info_photo", info.photo)
           bundle.putString("info_id", info.id)
           bundle.putString("info_email", info.email)
           intent.putExtra("bundle_key", bundle)
