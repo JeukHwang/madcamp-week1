@@ -83,11 +83,10 @@ class ContactsGridFragment : Fragment() {
         userUrl.text = info.githubId
         userEmail.text = info.email
 
-        // 추가
         itemView.setOnClickListener {
           val intent = Intent(this.context, ContactsDetailActivity::class.java)
           val bundle = Bundle()
-          //           bundle = intent.getBundleExtra("bundle")
+          bundle.putString("info_photo", info.profilePhoto)
           bundle.putString("info_id", info.id)
           bundle.putString("info_email", info.email)
           intent.putExtra("bundle_key", bundle)
