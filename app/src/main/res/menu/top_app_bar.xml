@@ -5,14 +5,15 @@
     <item
         android:id="@+id/edit"
         android:contentDescription="@string/content_description_search"
-        android:title="@string/edit"
+        android:icon="@drawable/baseline_edit_24"
+        android:title="edit"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/favorite"
-        android:contentDescription="@string/content_description_favorite"
-        android:icon="@drawable/baseline_favorite_24"
-        android:title="@string/favorite"
+        android:id="@+id/share"
+        android:contentDescription="share"
+        android:icon="@drawable/baseline_share_24"
+        android:title="share"
         app:showAsAction="ifRoom" />
 
     <item

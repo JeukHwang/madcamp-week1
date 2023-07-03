@@ -24,11 +24,11 @@ class SlideTabFragment : Fragment() {
 
     viewPager = binding.viewPager
     val pagerAdapter = ScreenSliderPagerAdapter(this)
+    pagerAdapter.addTabInfo(DevelopFragment(), "Develop", R.drawable.baseline_person_24)
     pagerAdapter.addTabInfo(
         ContactsFragment(), "Contacts", R.drawable.baseline_perm_contact_calendar_24)
     pagerAdapter.addTabInfo(GalleryFragment(), "Gallery", R.drawable.baseline_insert_photo_24)
     pagerAdapter.addTabInfo(ProfileFragment(), "Profile", R.drawable.baseline_person_24)
-    pagerAdapter.addTabInfo(DevelopFragment(), "Develop", R.drawable.baseline_person_24)
     viewPager.adapter = pagerAdapter
 
     val tabLayout = binding.tabLayout
