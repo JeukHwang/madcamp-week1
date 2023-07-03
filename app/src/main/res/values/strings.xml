@@ -6,4 +6,17 @@
     <string name="image_transition_name">image_transition_name</string>
     <string name="text_transition_name">text_transition_name</string>
     <string name="profile_input_hint">Write Your Github ID</string>
+    <string name="searchbar_hint">Searchbar Hint!</string>
+    <string name="title">Title</string>
+    <string name="supporting_text">Supporting text</string>
+    <string name="cancel">Cancel</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
+    <string name="development_fragment">Development Fragment</string>
+    <string name="content_description_search">search</string>
+    <string name="content_description_favorite">favorite</string>
+    <string name="content_description_more">more</string>
+    <string name="edit">edit</string>
+    <string name="favorite">favorite</string>
+    <string name="more">more</string>
 </resources>
