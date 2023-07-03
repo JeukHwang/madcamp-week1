@@ -85,9 +85,13 @@ class ContactsGridFragment : Fragment() {
 
         // 추가
         itemView.setOnClickListener {
-          val intent = Intent(context, ContactsDetailActivity::class.java)
-          intent.putExtra("data", info.githubId)
-          intent.run { context.startActivity(this) }
+          val intent = Intent(this.context, ContactsDetailActivity::class.java)
+          val bundle = Bundle()
+          //           bundle = intent.getBundleExtra("bundle")
+          bundle.putString("info_id", info.id)
+          bundle.putString("info_email", info.email)
+          intent.putExtra("bundle_key", bundle)
+          startActivity(intent)
         }
       }
     }
