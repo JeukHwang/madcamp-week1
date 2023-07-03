@@ -3,11 +3,11 @@ package com.madcamp.week1.gallery
 import android.os.Bundle
 import android.transition.Transition
 import android.view.MenuItem
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.ActivityGalleryDetailBinding
 
-class GalleryDetailActivity : FragmentActivity() {
+class GalleryDetailActivity : AppCompatActivity() {
   companion object {
     const val extraTitle: String = "title"
     const val extraPhotoUrl = "photoUrl"
