@@ -7,11 +7,10 @@
     <string name="text_transition_name">text_transition_name</string>
     <string name="profile_input_hint">Write Your Github ID</string>
     <string name="searchbar_hint">Searchbar Hint!</string>
-    <string name="title">Title</string>
-    <string name="supporting_text">Supporting text</string>
-    <string name="cancel">Cancel</string>
-    <string name="decline">Decline</string>
-    <string name="accept">Accept</string>
+    <string name="title">로그아웃할까요?</string>
+    <string name="supporting_text">디바이스에 저장된 계정 정보를 삭제합니다. 계속할까요?</string>
+    <string name="decline">취소</string>
+    <string name="accept">로그아웃</string>
     <string name="development_fragment">Development Fragment</string>
     <string name="content_description_search">search</string>
     <string name="content_description_favorite">favorite</string>
@@ -20,4 +19,8 @@
     <string name="favorite">favorite</string>
     <string name="more">more</string>
     <string name="preference_file_key">Preference_File_Key</string>
+    <string name="onFailure">네트워크가 연결되어 있는지 확인해주세요</string>
+    <string name="onSemiFailure">개발자에게 오류가 있다고 알려주세요</string>
+    <string name="accept2">돌아가기</string>
+    <string name="supporting_text2">저장되지 않은 수정 내역이 사라집니다. 계속할까요?</string>
 </resources>

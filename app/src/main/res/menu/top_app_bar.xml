@@ -17,9 +17,17 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/more"
-        android:contentDescription="@string/content_description_more"
-        android:title="@string/more"
+        android:id="@+id/refresh"
+        android:contentDescription="refresh"
+        android:icon="@drawable/outline_refresh_24"
+        android:title="refresh"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/logout"
+        android:contentDescription="logout"
+        android:icon="@drawable/outline_logout_24"
+        android:title="로그아웃"
         app:showAsAction="never" />
 
 </menu>

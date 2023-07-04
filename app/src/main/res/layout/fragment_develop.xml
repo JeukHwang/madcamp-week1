@@ -22,12 +22,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/top_app_bar"
-                app:subtitle="함께 몰입의"
                 app:title="프로필"
 
                 />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Note: A RecyclerView can also be used -->
@@ -54,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="80dp"
+                android:paddingTop="120dp"
                 android:paddingBottom="40dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +67,7 @@
                     android:paddingHorizontal="80dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/profile_photo"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
@@ -73,7 +77,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/man_face" />
+                        tools:src="@drawable/man_face" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -89,6 +93,7 @@
                     android:id="@+id/materialTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     android:text="함께 몰입의 세계로 빠져드는 친구들에게 본인을 소개해주세요"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold" />
@@ -101,7 +106,6 @@
                     android:hint="이름"
                     app:boxStrokeWidth="0dp"
                     app:expandedHintEnabled="false"
-                    app:prefixText="이름"
                     app:startIconDrawable="@drawable/baseline_person_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -119,7 +123,6 @@
                     android:hint="분반"
                     app:boxStrokeWidth="0dp"
                     app:expandedHintEnabled="false"
-                    app:prefixText="분반"
                     app:startIconDrawable="@drawable/outline_school_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -138,7 +141,6 @@
                     android:hint="나에 관한 흥미로운 사실"
                     app:boxStrokeWidth="0dp"
                     app:expandedHintEnabled="false"
-                    app:prefixText="나에 관한 흥미로운 사실"
                     app:startIconDrawable="@drawable/outline_lightbulb_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -155,10 +157,8 @@
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:hint="이메일"
-                    android:textCursorDrawable="@drawable/color_cursor"
                     app:boxStrokeWidth="0dp"
                     app:expandedHintEnabled="false"
-                    app:prefixText="이메일"
                     app:startIconDrawable="@drawable/outline_email_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -177,7 +177,6 @@
                     android:hint="Github 아이디"
                     app:boxStrokeWidth="0dp"
                     app:expandedHintEnabled="false"
-                    app:prefixText="Github 아이디"
                     app:startIconDrawable="@drawable/github_logo_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -195,7 +194,6 @@
                     android:hint="Instagram 아이디"
                     app:boxStrokeWidth="0dp"
                     app:expandedHintEnabled="false"
-                    app:prefixText="Instagram 아이디"
                     app:startIconDrawable="@drawable/instagram_logo_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -213,7 +211,6 @@
                     android:hint="LinkedIn 아이디"
                     app:boxStrokeWidth="0dp"
                     app:expandedHintEnabled="false"
-                    app:prefixText="LinkedIn 아이디"
                     app:startIconDrawable="@drawable/linkedin_logo_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -230,14 +227,15 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="4dp"
+                    android:layout_marginVertical="8dp"
                     android:text="연동"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:text="연동을 통해 프로필을 더 쉽게 채워보세요"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold" />
@@ -247,6 +245,7 @@
                     style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="4dp"
                     android:text="Google 연동하기"
                     app:icon="@drawable/google_logo_24" />
 
@@ -255,6 +254,7 @@
                     style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="4dp"
                     android:text="Github 연동하기"
                     app:icon="@drawable/github_logo_24" />
 

@@ -6,16 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentContactsGridBinding
+import com.madcamp.week1.profile.ServerApiClass
+import com.madcamp.week1.profile.UserProfile
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ContactsGridFragment : Fragment() {
 
   private lateinit var binding: FragmentContactsGridBinding
+  private var dataset: ArrayList<UserProfile> = ArrayList()
 
   override fun onCreateView(
       inflater: LayoutInflater,
@@ -28,6 +35,7 @@ class ContactsGridFragment : Fragment() {
       layoutManager = GridLayoutManager(this.context, 1)
       adapter = GridAdapter()
     }
+    (binding.contactsGridRecyclerview.adapter as GridAdapter).updateData()
     return binding.root
   }
 
@@ -46,14 +54,14 @@ class ContactsGridFragment : Fragment() {
         userEmail = view.findViewById(R.id.userEmailTv)
       }
 
-      fun bind(info: ContactsInfo) {
-        if (info.photo != "") {
-          userPhoto.load(info.photo) // url로 가져오기
+      fun bind(info: UserProfile) {
+        if (info.profilePhoto != "") {
+          userPhoto.load(info.profilePhoto) // url로 가져오기
         } else {
           userPhoto.setImageResource(R.mipmap.ic_launcher)
         }
         userId.text = info.id
-        userUrl.text = info.github_url
+        userUrl.text = info.githubId
         userEmail.text = info.email
       }
     }
@@ -66,11 +74,40 @@ class ContactsGridFragment : Fragment() {
     }
 
     override fun getItemCount(): Int {
-      return ContactsInfo.dataset.size
+      return dataset.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      holder.bind(ContactsInfo.dataset[position])
+      holder.bind(dataset[position])
+    }
+
+    fun updateData() {
+      dataset.clear()
+
+      ServerApiClass.getAll(
+          object : Callback<Array<UserProfile>> {
+            override fun onResponse(
+                call: Call<Array<UserProfile>>,
+                response: Response<Array<UserProfile>>
+            ) {
+              if (response.isSuccessful) {
+                val userProfiles = response.body()!!
+                dataset.addAll(userProfiles)
+                dataset.addAll(userProfiles)
+                dataset.addAll(userProfiles)
+                dataset.addAll(userProfiles)
+                dataset.addAll(userProfiles)
+
+                notifyDataSetChanged()
+              } else {
+                Toast.makeText(activity, R.string.onSemiFailure, Toast.LENGTH_SHORT).show()
+              }
+            }
+
+            override fun onFailure(call: Call<Array<UserProfile>>, t: Throwable) {
+              Toast.makeText(activity, R.string.onFailure, Toast.LENGTH_SHORT).show()
+            }
+          })
     }
   }
 }

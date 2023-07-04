@@ -14,8 +14,6 @@ import coil.transform.CircleCropTransformation
 import com.madcamp.week1.databinding.FragmentProfileBinding
 import com.madcamp.week1.profile.GithubApiObject
 import com.madcamp.week1.profile.GithubUserData
-import com.madcamp.week1.profile.ServerApiClass
-import com.madcamp.week1.profile.SignupData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,27 +28,6 @@ class ProfileFragment : Fragment() {
       savedInstanceState: Bundle?
   ): View {
     binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-    ServerApiClass.signup(
-        "JeukHwang",
-        "strong",
-        "jeukhwang@gmail.com",
-        object : Callback<SignupData> {
-          override fun onResponse(call: Call<SignupData>, response: Response<SignupData>) {
-            if (response.isSuccessful) {
-              val data = response.body()!!
-              activity?.runOnUiThread { binding.nameProfile.text = data.toString() }
-              Log.i("API", data.toString())
-              Log.i("Retrofit2", "non-error")
-            } else {
-              Log.e("Retrofit2", "semi-error")
-            }
-          }
-
-          override fun onFailure(call: Call<SignupData>, t: Throwable) {
-            Log.e("Retrofit2", "error")
-          }
-        })
     binding.searchInputProfile.setOnKeyListener { _, keyCode, event ->
       if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
         val githubId = binding.searchInputProfile.text.toString()

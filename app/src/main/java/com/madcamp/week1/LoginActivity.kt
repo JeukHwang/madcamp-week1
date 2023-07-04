@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.madcamp.week1.databinding.ActivityLoginBinding
 import com.madcamp.week1.profile.ServerApiClass
-import com.madcamp.week1.profile.SignupData
+import com.madcamp.week1.profile.UserProfile
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,27 +71,31 @@ class LoginActivity : FragmentActivity() {
         name,
         password,
         classStr,
-        object : Callback<SignupData> {
-          override fun onResponse(call: Call<SignupData>, response: Response<SignupData>) {
-            if (response.isSuccessful && (response.body()?.name?.isNotBlank() == true)) {
-              val sharedPref =
-                  this@LoginActivity.getSharedPreferences(
-                      getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-              with(sharedPref.edit()) {
-                putString("name", name)
-                putString("password", password)
-                apply()
+        object : Callback<UserProfile> {
+          override fun onResponse(call: Call<UserProfile>, response: Response<UserProfile>) {
+            if (response.isSuccessful) {
+              if (response.body()?.name?.isNotBlank() == true) {
+                val sharedPref =
+                    this@LoginActivity.getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+                with(sharedPref.edit()) {
+                  putString("name", name)
+                  putString("password", password)
+                  apply()
+                }
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+              } else {
+                Toast.makeText(this@LoginActivity, "올바른 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
               }
-              val intent = Intent(this@LoginActivity, MainActivity::class.java)
-              startActivity(intent)
-              finish()
             } else {
-              Toast.makeText(this@LoginActivity, "오류가 있으니 개발자에게 알려주세요", Toast.LENGTH_SHORT).show()
+              Toast.makeText(this@LoginActivity, R.string.onSemiFailure, Toast.LENGTH_SHORT).show()
             }
           }
 
-          override fun onFailure(call: Call<SignupData>, t: Throwable) {
-            Toast.makeText(this@LoginActivity, "오류가 있으니 개발자에게 알려주세요", Toast.LENGTH_SHORT).show()
+          override fun onFailure(call: Call<UserProfile>, t: Throwable) {
+            Toast.makeText(this@LoginActivity, R.string.onFailure, Toast.LENGTH_SHORT).show()
           }
         })
   }

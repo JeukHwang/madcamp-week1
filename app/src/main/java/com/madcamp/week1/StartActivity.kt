@@ -1,5 +1,6 @@
 package com.madcamp.week1
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -24,21 +25,7 @@ class StartActivity : AppCompatActivity() {
     binding = ActivityStartBinding.inflate(layoutInflater)
     val view = binding.root
     setContentView(view)
-    val fadeOut = AlphaAnimation(1f, 0f)
-    fadeOut.interpolator = AccelerateInterpolator() // and this
-    fadeOut.startOffset = 500
-    fadeOut.duration = 500
-    fadeOut.setAnimationListener(
-        object : AnimationListener {
-          override fun onAnimationStart(animation: Animation) {}
-          override fun onAnimationRepeat(animation: Animation) {}
-          override fun onAnimationEnd(animation: Animation) {
-            binding.lottieAnim.visibility = View.GONE
-          }
-        })
-    binding.lottieLayout.animation = fadeOut
-
-    Handler(Looper.getMainLooper()).postDelayed({ checkValid() }, 1000)
+    checkValid()
   }
 
   private fun checkValid() {
@@ -58,28 +45,40 @@ class StartActivity : AppCompatActivity() {
           object : Callback<Boolean> {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
               if (response.isSuccessful && (response.body()!!)) {
-                //              Toast.makeText(this@StartActivity, "자동 로그인 성공",
-                // Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@StartActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                moveActivity(MainActivity::class.java)
               } else {
-                //              Toast.makeText(this@StartActivity, "자동 로그인 실패",
-                // Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@StartActivity, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
+                moveActivity(LoginActivity::class.java)
               }
             }
 
             override fun onFailure(call: Call<Boolean>, t: Throwable) {
-              //            Toast.makeText(this@StartActivity, "자동 로그인 실패",
-              // Toast.LENGTH_SHORT).show()
-              val intent = Intent(this@StartActivity, LoginActivity::class.java)
-              startActivity(intent)
-              finish()
+              moveActivity(LoginActivity::class.java)
             }
           })
     }
+  }
+
+  fun <T : Activity> moveActivity(targetActivity: Class<T>) {
+    val fadeOut = AlphaAnimation(1f, 0f)
+    fadeOut.interpolator = AccelerateInterpolator()
+    fadeOut.startOffset = 0
+    fadeOut.duration = 900
+    fadeOut.setAnimationListener(
+        object : AnimationListener {
+          override fun onAnimationStart(animation: Animation) {}
+          override fun onAnimationRepeat(animation: Animation) {}
+          override fun onAnimationEnd(animation: Animation) {
+            binding.lottieAnim.visibility = View.GONE
+          }
+        })
+    binding.lottieLayout.startAnimation(fadeOut)
+    Handler(Looper.getMainLooper())
+        .postDelayed(
+            {
+              val intent = Intent(this@StartActivity, targetActivity)
+              startActivity(intent)
+              overridePendingTransition(R.anim.hold, R.anim.fade_out)
+            },
+            1000)
   }
 }
