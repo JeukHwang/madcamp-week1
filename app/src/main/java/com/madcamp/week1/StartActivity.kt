@@ -48,7 +48,7 @@ class StartActivity : AppCompatActivity() {
     val name = sharedPref.getString("name", "")!!
     val password = sharedPref.getString("password", "")!!
     if (name === "" && password === "") {
-      val intent = Intent(this@StartActivity, MainActivity::class.java)
+      val intent = Intent(this@StartActivity, LoginActivity::class.java)
       startActivity(intent)
       finish()
     } else {
@@ -66,7 +66,7 @@ class StartActivity : AppCompatActivity() {
               } else {
                 //              Toast.makeText(this@StartActivity, "자동 로그인 실패",
                 // Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@StartActivity, MainActivity::class.java)
+                val intent = Intent(this@StartActivity, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
               }
@@ -75,7 +75,7 @@ class StartActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Boolean>, t: Throwable) {
               //            Toast.makeText(this@StartActivity, "자동 로그인 실패",
               // Toast.LENGTH_SHORT).show()
-              val intent = Intent(this@StartActivity, MainActivity::class.java)
+              val intent = Intent(this@StartActivity, LoginActivity::class.java)
               startActivity(intent)
               finish()
             }
