@@ -92,7 +92,7 @@ class DevelopFragment : Fragment() {
                                 binding.developLinkedInId.text =
                                     if (serverUser[i].linkedInId !== null) "${serverUser[i].linkedInId}" else ""
                                 binding.developExplanation.text =
-                                    if (serverUser[i].githubId !== null) "${serverUser[i].githubId}" else ""
+                                    if (serverUser[i].explanation !== null) "${serverUser[i].explanation}" else ""
 
                                 binding.developImage.load(serverUser[i].profilePhoto) {
                                     crossfade(true)
