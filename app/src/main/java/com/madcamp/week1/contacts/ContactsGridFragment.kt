@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentContactsGridBinding
+
 
 class ContactsGridFragment : Fragment() {
 
@@ -51,7 +53,11 @@ class ContactsGridFragment : Fragment() {
 
       fun bind(info: ContactsInfo) {
         if (info.photo != "") {
-          userPhoto.load(info.photo) // url로 가져오기
+          userPhoto.load(info.photo) {
+            crossfade(true)
+            placeholder(android.R.drawable.ic_menu_report_image)
+            transformations(CircleCropTransformation())
+          }
         } else {
           userPhoto.setImageResource(R.mipmap.ic_launcher)
         }

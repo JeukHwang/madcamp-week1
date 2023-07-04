@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.fragment.app.FragmentActivity
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.madcamp.week1.databinding.ActivityContactsDetailBinding
 
 class ContactsDetailActivity : FragmentActivity() {
@@ -23,7 +24,11 @@ class ContactsDetailActivity : FragmentActivity() {
     val info_email = bundle.getString("info_email")
     if (info_id != null) {
       Log.i("PLZ", info_id)
-      binding.displayPhoto.load(info_photo)
+      binding.displayPhoto.load(info_photo) {
+        crossfade(true)
+        placeholder(android.R.drawable.ic_menu_report_image)
+        transformations(CircleCropTransformation())
+      }
       binding.displayId.text = info_id
       binding.displayEmail.text = info_email
     }
