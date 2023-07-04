@@ -38,7 +38,7 @@ class ProfileEditActivity : AppCompatActivity() {
     setUserProfile(userProfile)
     binding.toolbar.setNavigationOnClickListener {
       MaterialAlertDialogBuilder(this@ProfileEditActivity)
-          .setTitle(resources.getString(R.string.title))
+          .setTitle(resources.getString(R.string.title2))
           .setMessage(resources.getString(R.string.supporting_text2))
           .setNegativeButton(resources.getString(R.string.decline)) { dialog, which -> }
           .setPositiveButton(resources.getString(R.string.accept2)) { dialog, which ->

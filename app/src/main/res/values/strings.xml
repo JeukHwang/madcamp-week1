@@ -23,4 +23,5 @@
     <string name="onSemiFailure">개발자에게 오류가 있다고 알려주세요</string>
     <string name="accept2">돌아가기</string>
     <string name="supporting_text2">저장되지 않은 수정 내역이 사라집니다. 계속할까요?</string>
+    <string name="title2">수정을 취소할까요?</string>
 </resources>
