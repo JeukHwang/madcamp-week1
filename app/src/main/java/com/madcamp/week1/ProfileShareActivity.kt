@@ -2,8 +2,8 @@ package com.madcamp.week1
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.madcamp.week1.databinding.ActivityProfileShareBinding
@@ -17,8 +17,11 @@ class ProfileShareActivity : AppCompatActivity() {
         binding = ActivityProfileShareBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        Log.i("HELLO", "여기까지 옴")
         binding.toolbar.setNavigationOnClickListener { finish() }
+
+        binding.shareInstagramBtn.setOnClickListener { shareInstagram() }
+
+        binding.shareGithubBtn.setOnClickListener { shareGithub() }
 
         binding.shareTextBtn.setOnClickListener { shareText() }
 
@@ -36,6 +39,16 @@ class ProfileShareActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         )
             .show()
+    }
+
+    private fun shareInstagram() {
+        val instagram_urlintent = Intent(Intent.ACTION_VIEW, Uri.parse("https://m.instagram.com/"))
+        startActivity(instagram_urlintent)
+    }
+
+    private fun shareGithub() {
+        val github_urlintent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/"))
+        startActivity(github_urlintent)
     }
 
     private fun shareText() {
