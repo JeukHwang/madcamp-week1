@@ -104,3 +104,46 @@ class ProfileFragment : Fragment() {
         })
   }
 }
+
+/*
+private fun fetchServerUser(githubId: String) {
+    val call = ServerApiClass.getRetrofitService.getServerUser(("/user/all"))
+    call.enqueue(
+        object : Callback<SignupData> {
+            override fun onResponse(call: Call<SignupData>, response: Response<SignupData>) {
+                if (response.isSuccessful) {
+                    val serverUser: SignupData = response.body()!!
+                    activity?.runOnUiThread {
+                        binding.nameProfile.text =
+                            if (serverUser.name !== null) "${serverUser.name}" else ""
+                        binding.companyProfile.text =
+                            if (serverUser.company !== null) "${serverUser.company}" else ""
+                        binding.imageProfile.load(serverUser.avatar_url) {
+                            crossfade(true)
+                            placeholder(android.R.drawable.ic_menu_report_image)
+                            transformations(CircleCropTransformation())
+                        }
+                        binding.blogProfile.text =
+                            if (serverUser.blog !== null) "${serverUser.blog}" else ""
+                        binding.bioProfile.text = if (serverUser.bio !== null) "${serverUser.bio}" else ""
+                    }
+                    Log.i("API", githubUser.toString())
+                } else {
+                    Toast.makeText(
+                        this@ProfileFragment.requireContext(),
+                        "Cannot get Github Profile...",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<GithubUserData>, t: Throwable) {
+                Toast.makeText(
+                    this@ProfileFragment.requireContext(),
+                    "Cannot get Github Profile :(",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
+}
+*/
