@@ -1,6 +1,7 @@
 package com.madcamp.week1
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import com.madcamp.week1.databinding.FragmentDevelopBinding
 class DevelopFragment : Fragment() {
 
   private lateinit var binding: FragmentDevelopBinding
-
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -30,21 +30,44 @@ class DevelopFragment : Fragment() {
           startActivity(intent)
           true
         }
-
-        R.id.share -> {
-          val intent = Intent(this.context, ProfileShareActivity::class.java)
-          //                    val bundle = Bundle()
-          //                    bundle.putString("info_photo", info.photo)
-          //                    bundle.putString("info_id", info.id)
-          //                    bundle.putString("info_email", info.email)
-          //                    intent.putExtra("bundle_key", bundle)
-          startActivity(intent)
-          true
-        }
+        /*
+                R.id.share -> {
+                  R.id.shareInstagramBtn. shareInstagram()
+                  val intent = Intent(this.context, ProfileShareActivity::class.java)
+                  //                    val bundle = Bundle()
+                  //                    bundle.putString("info_photo", info.photo)
+                  //                    bundle.putString("info_id", info.id)
+                  //                    bundle.putString("info_email", info.email)
+                  //                    intent.putExtra("bundle_key", bundle)
+                  startActivity(intent)
+                  true
+                }
+         */
 
         else -> false
       }
     }
     return binding.root
+  }
+
+  private fun shareInstagram() {
+    val instagram_urlintent = Intent(Intent.ACTION_VIEW, Uri.parse("https://m.instagram.com/"))
+    startActivity(instagram_urlintent)
+  }
+
+  private fun shareGithub() {
+    val github_urlintent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/"))
+    startActivity(github_urlintent)
+  }
+
+  private fun shareText() {
+    val sendIntent: Intent = Intent().apply {
+      action = Intent.ACTION_SEND
+      putExtra(Intent.EXTRA_TEXT, "@@@ 앱을 통해 몰입캠프 참가 학생과 프로필을 공유해 보아요.")
+      type = "text/plain"
+    }
+
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    startActivity(shareIntent)
   }
 }
