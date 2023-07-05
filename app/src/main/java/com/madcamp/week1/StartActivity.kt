@@ -78,6 +78,7 @@ class StartActivity : AppCompatActivity() {
               val intent = Intent(this@StartActivity, targetActivity)
               startActivity(intent)
               overridePendingTransition(R.anim.hold, R.anim.fade_out)
+              finish()
             },
             1000)
   }
