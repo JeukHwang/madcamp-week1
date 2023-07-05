@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.transition.Transition
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.madcamp.week1.R
+import coil.load
 import com.madcamp.week1.databinding.ActivityGalleryDetailBinding
 
 class GalleryDetailActivity : AppCompatActivity() {
@@ -17,7 +17,14 @@ class GalleryDetailActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityGalleryDetailBinding.inflate(layoutInflater)
-    setContentView(R.layout.activity_gallery_detail)
+    // setContentView(R.layout.activity_gallery_detail)
+    setContentView(binding.root)
+
+    val bundle = intent.getBundleExtra("bundle_key")!!
+    val info_photourl = bundle.getString("info_photourl")
+    if (info_photourl != null) {
+      binding.imageView.load(info_photourl)
+    }
     //    val title = intent.getStringExtra(extraTitle)
     //    val photoUrl = intent.getStringExtra(extraPhotoUrl)
     //    this@GalleryDetailActivity.runOnUiThread { binding.textView.text = title }

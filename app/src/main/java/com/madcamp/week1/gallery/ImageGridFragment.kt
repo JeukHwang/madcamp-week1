@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +33,7 @@ class ImageGridFragment : Fragment() {
     return binding.root
   }
 
+  /*
   fun onItemClick(item: GridItem, imageView: ImageView, textView: TextView) {
     val intent = Intent(requireContext(), GalleryDetailActivity::class.java)
 
@@ -46,7 +45,7 @@ class ImageGridFragment : Fragment() {
     intent.putExtra(GalleryDetailActivity.extraTitle, item.title)
     intent.putExtra(GalleryDetailActivity.extraPhotoUrl, item.photoUrl)
     startActivity(intent, options.toBundle())
-  }
+  }*/
 
   inner class GridAdapter : RecyclerView.Adapter<GridAdapter.ViewHolder>() {
 
@@ -81,7 +80,14 @@ class ImageGridFragment : Fragment() {
                 "${gridItem.title} at position $position is clicked!",
                 Toast.LENGTH_SHORT)
             .show()
-        onItemClick(gridItem, viewHolder.imageView, viewHolder.textView)
+        // onItemClick(gridItem, viewHolder.imageView, viewHolder.textView)
+
+        val intent = Intent(context, GalleryDetailActivity::class.java)
+        val bundle = Bundle()
+
+        bundle.putString("info_photourl", gridItem.photoUrl)
+        intent.putExtra("bundle_key", bundle)
+        startActivity(intent)
       }
     }
 
