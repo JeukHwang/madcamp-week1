@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +15,6 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentContactsGridBinding
-import com.madcamp.week1.gallery.GalleryDetailActivity
-import com.madcamp.week1.gallery.GridItem
 import com.madcamp.week1.profile.ServerApiClass
 import com.madcamp.week1.profile.UserProfile
 import retrofit2.Call
@@ -45,56 +41,46 @@ class ContactsGridFragment : Fragment() {
     return binding.root
   }
 
-  fun onItemClick(item: GridItem, imageView: ImageView, textView: TextView) {
-    val intent = Intent(requireContext(), ContactsDetailActivity::class.java)
-
-    val imageViewPair = Pair<View, String>(imageView, getString(R.string.image_transition_name))
-    val textViewPair = Pair<View, String>(textView, getString(R.string.text_transition_name))
-    val options =
-        ActivityOptionsCompat.makeSceneTransitionAnimation(
-            this.requireActivity(), imageViewPair, textViewPair)
-    intent.putExtra(GalleryDetailActivity.extraTitle, item.title)
-    intent.putExtra(GalleryDetailActivity.extraPhotoUrl, item.photoUrl)
-    startActivity(intent, options.toBundle())
-  }
-
   inner class GridAdapter : RecyclerView.Adapter<GridAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
       private val userPhoto: ImageView
-      private val userId: TextView
-      private val userUrl: TextView
-      private val userEmail: TextView
+      private val userName: TextView
+      private val userClass: TextView
+      private val userExplanation: TextView
       private val context = binding.root.context // 추가
 
       init {
-        userPhoto = view.findViewById(R.id.userPhotoImg)
-        userId = view.findViewById(R.id.userLoginTv)
-        userUrl = view.findViewById(R.id.userUrlTv)
-        userEmail = view.findViewById(R.id.userEmailTv)
+        userPhoto = view.findViewById(R.id.contacts_image)
+        userName = view.findViewById(R.id.contacts_name)
+        userClass = view.findViewById(R.id.contacts_class_text)
+        userExplanation = view.findViewById(R.id.contacts_explanation_text)
       }
 
-      fun bind(info: UserProfile) {
-        if (info.profilePhoto != "") {
-          userPhoto.load(info.profilePhoto) {
-            crossfade(true)
-            placeholder(android.R.drawable.ic_menu_report_image)
+      fun bind(userProfile: UserProfile) {
+        if (userProfile.profilePhoto != "") {
+          userPhoto.load(userProfile.profilePhoto) {
+            placeholder(R.drawable.baseline_person_24)
             transformations(CircleCropTransformation())
+            crossfade(500)
           }
         } else {
           userPhoto.setImageResource(R.mipmap.ic_launcher)
         }
-        userId.text = info.id
-        userUrl.text = info.githubId
-        userEmail.text = info.email
+        userName.text = userProfile.name
+        userClass.text = "${userProfile.classNum}분반"
+        userExplanation.text = userProfile.explanation
 
         itemView.setOnClickListener {
           val intent = Intent(this.context, ContactsDetailActivity::class.java)
-          val bundle = Bundle()
-          bundle.putString("info_photo", info.profilePhoto)
-          bundle.putString("info_id", info.id)
-          bundle.putString("info_email", info.email)
-          intent.putExtra("bundle_key", bundle)
+          intent.putExtra("profile", userProfile)
+          /*          val imageViewPair =
+              Pair<View, String>(imageView, getString(R.string.image_transition_name))
+          val textViewPair = Pair<View, String>(textView, getString(R.string.text_transition_name))
+          val options =
+              ActivityOptionsCompat.makeSceneTransitionAnimation(
+                  this.requireActivity(), imageViewPair, textViewPair)
+          startActivity(intent, options.toBundle())*/
           startActivity(intent)
         }
       }
