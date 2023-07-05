@@ -64,7 +64,7 @@ class ProfileEditActivity : AppCompatActivity() {
             photoUri = it.data?.data
             binding.profilePhotoEdit.load(photoUri) {
               placeholder(R.drawable.baseline_person_24)
-              error(R.drawable.outline_error_outline_24)
+              error(R.drawable.baseline_person_24)
               transformations(CircleCropTransformation())
               crossfade(500)
             }
@@ -125,7 +125,7 @@ class ProfileEditActivity : AppCompatActivity() {
   fun setUserProfile(userProfile: UserProfile) {
     binding.profilePhotoEdit.load(userProfile.profilePhoto) {
       placeholder(R.drawable.baseline_person_24)
-      error(R.drawable.outline_error_outline_24)
+      error(R.drawable.baseline_person_24)
       transformations(CircleCropTransformation())
       crossfade(500)
     }
@@ -153,7 +153,7 @@ class ProfileEditActivity : AppCompatActivity() {
               response: Response<ImageUploadData>
           ) {
             if (response.isSuccessful) {
-              var photoPath =
+              val photoPath =
                   "https://community-nest.s3.ap-northeast-2.amazonaws.com/${response.body()?.key}"
               editUser(photoPath)
               Log.e("WOW", photoPath)

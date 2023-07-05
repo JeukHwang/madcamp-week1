@@ -70,7 +70,7 @@ class ImageGridFragment : Fragment() {
       val gridItem = GridItem.getData(position)
       viewHolder.imageView.load(gridItem.photoUrl) {
         placeholder(R.drawable.baseline_downloading_24)
-        error(R.drawable.baseline_error_outline_24)
+        error(R.drawable.outline_error_outline_24)
         transformations(RoundedCornersTransformation(40F))
         crossfade(true)
       }

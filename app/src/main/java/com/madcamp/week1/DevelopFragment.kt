@@ -104,7 +104,7 @@ class DevelopFragment : Fragment() {
   fun updateProfile(userProfile: UserProfile) {
     binding.profilePhoto.load(userProfile.profilePhoto) {
       placeholder(R.drawable.baseline_person_24)
-      error(R.drawable.outline_error_outline_24)
+      error(R.drawable.baseline_person_24)
       transformations(CircleCropTransformation())
       crossfade(500)
     }
