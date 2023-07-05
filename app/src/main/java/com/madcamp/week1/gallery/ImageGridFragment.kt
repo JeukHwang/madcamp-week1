@@ -2,6 +2,7 @@ package com.madcamp.week1.gallery
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +14,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.madcamp.week1.GalleryViewActivity
 import com.madcamp.week1.R
 import com.madcamp.week1.databinding.FragmentImageGridBinding
+import com.madcamp.week1.profile.FeedProfile
+import com.madcamp.week1.profile.ServerApiClass
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ImageGridFragment : Fragment() {
   private lateinit var binding: FragmentImageGridBinding
-
+  private var dataset: ArrayList<FeedProfile> = ArrayList()
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -30,6 +37,7 @@ class ImageGridFragment : Fragment() {
       layoutManager = GridLayoutManager(this.context, 3)
       adapter = GridAdapter()
     }
+    (binding.imageGridRecyclerview.adapter as GridAdapter).updateData()
     return binding.root
   }
 
@@ -82,7 +90,7 @@ class ImageGridFragment : Fragment() {
             .show()
         // onItemClick(gridItem, viewHolder.imageView, viewHolder.textView)
 
-        val intent = Intent(context, GalleryDetailActivity::class.java)
+        val intent = Intent(context, GalleryViewActivity::class.java)
         val bundle = Bundle()
 
         bundle.putString("info_photourl", gridItem.photoUrl)
@@ -92,7 +100,35 @@ class ImageGridFragment : Fragment() {
     }
 
     override fun getItemCount(): Int {
-      return GridItem.size
+      return dataset.size
+    }
+
+    fun updateData() {
+      dataset.clear()
+
+      ServerApiClass.getAllFeed(
+          object : Callback<Array<FeedProfile>> {
+            override fun onResponse(
+                call: Call<Array<FeedProfile>>,
+                response: Response<Array<FeedProfile>>
+            ) {
+              if (response.isSuccessful) {
+                val feedProfiles = response.body()!!
+                dataset.addAll(feedProfiles)
+
+                notifyDataSetChanged()
+              } else {
+
+                Toast.makeText(activity, R.string.onSemiFailure, Toast.LENGTH_SHORT).show()
+              }
+              Log.i("ACT", response.message())
+            }
+
+            override fun onFailure(call: Call<Array<FeedProfile>>, t: Throwable) {
+              Log.i("ACT", "?")
+              Toast.makeText(activity, R.string.onFailure, Toast.LENGTH_SHORT).show()
+            }
+          })
     }
   }
 }

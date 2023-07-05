@@ -29,6 +29,13 @@ interface ServerAPIInterface {
   @Multipart
   @POST("/test/public-upload")
   fun uploadImage(@Part file: MultipartBody.Part): Call<ImageUploadData>
+
+  @GET("/feed") fun getAllFeed(): Call<Array<FeedProfile>>
+  @POST("/feed/one") fun getOneFeed(@Body params: RequestBody): Call<FeedProfile>
+  @POST("/feed/wrote") fun getWroteFeed(@Body params: RequestBody): Call<Array<FeedProfile>>
+  @POST("/feed/tagged") fun getTaggedFeed(@Body params: RequestBody): Call<Array<FeedProfile>>
+  @POST("/feed/create") fun createFeed(@Body params: RequestBody): Call<FeedProfile>
+  @POST("/feed/update") fun updateFeed(@Body params: RequestBody): Call<FeedProfile>
 }
 
 class ServerApiClass {
@@ -132,6 +139,84 @@ class ServerApiClass {
       val body: MultipartBody.Part =
           MultipartBody.Part.createFormData("file", uri.path, requestBody)
       val call = getRetrofitService.uploadImage(body)
+      call.enqueue(callback)
+    }
+
+    fun getAllFeed(callback: Callback<Array<FeedProfile>>) {
+      val call = getRetrofitService.getAllFeed()
+      call.enqueue(callback)
+    }
+
+    fun getOneFeed(id: String, callback: Callback<FeedProfile>) {
+      val body =
+          JSONObject(mapOf("id" to id))
+              .toString()
+              .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+      val call = getRetrofitService.getOneFeed(body)
+      call.enqueue(callback)
+    }
+
+    fun getWroteFeed(name: String, callback: Callback<Array<FeedProfile>>) {
+      val body =
+          JSONObject(mapOf("name" to name))
+              .toString()
+              .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+      val call = getRetrofitService.getWroteFeed(body)
+      call.enqueue(callback)
+    }
+
+    fun getTaggedFeed(name: String, callback: Callback<Array<FeedProfile>>) {
+      val body =
+          JSONObject(mapOf("name" to name))
+              .toString()
+              .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+      val call = getRetrofitService.getTaggedFeed(body)
+      call.enqueue(callback)
+    }
+
+    fun createFeed(
+        name: String,
+        password: String,
+        photo: String,
+        content: String,
+        taggedName: Array<String>,
+        callback: Callback<FeedProfile>
+    ) {
+      val body =
+          JSONObject(
+                  mapOf(
+                      "name" to name,
+                      "password" to password,
+                      "photo" to photo,
+                      "content" to content,
+                      "taggedName" to taggedName))
+              .toString()
+              .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+      val call = getRetrofitService.createFeed(body)
+      call.enqueue(callback)
+    }
+
+    fun updateFeed(
+        id: String,
+        name: String,
+        password: String,
+        photo: String,
+        content: String,
+        taggedName: Array<String>,
+        callback: Callback<FeedProfile>
+    ) {
+      val body =
+          JSONObject(
+                  mapOf(
+                      "id" to id,
+                      "name" to name,
+                      "password" to password,
+                      "photo" to photo,
+                      "content" to content,
+                      "taggedName" to taggedName))
+              .toString()
+              .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+      val call = getRetrofitService.updateFeed(body)
       call.enqueue(callback)
     }
   }

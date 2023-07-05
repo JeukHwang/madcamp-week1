@@ -32,6 +32,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ProfileEditActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".GalleryViewActivity" />
+        <activity android:name=".GalleryCreateActivity" />
     </application>
 
 </manifest>
