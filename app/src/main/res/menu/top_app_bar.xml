@@ -9,14 +9,14 @@
         android:contentDescription="@string/content_description_search"
         android:icon="@drawable/baseline_edit_24"
         android:title="edit"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/share"
         android:contentDescription="share"
         android:icon="@drawable/baseline_share_24"
         android:title="share"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/refresh"
@@ -29,7 +29,7 @@
         android:id="@+id/logout"
         android:contentDescription="logout"
         android:icon="@drawable/outline_logout_24"
-        android:title="로그아웃"
+        android:title="logout"
         app:showAsAction="ifRoom" />
 
 </menu>
