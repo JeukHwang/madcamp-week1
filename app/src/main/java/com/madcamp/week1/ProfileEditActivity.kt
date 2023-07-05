@@ -68,7 +68,7 @@ class ProfileEditActivity : AppCompatActivity() {
               transformations(CircleCropTransformation())
               crossfade(500)
             }
-            Toast.makeText(this@ProfileEditActivity, photoUri.toString(), Toast.LENGTH_LONG).show()
+            //Toast.makeText(this@ProfileEditActivity, photoUri.toString(), Toast.LENGTH_LONG).show()
             Log.i("URI", photoUri.toString())
             Log.i("URI2", photoUri?.path!!)
             val mimetype =
@@ -108,7 +108,11 @@ class ProfileEditActivity : AppCompatActivity() {
               setResult(RESULT_OK, intent)
               Log.e("PLZPLZPLZ2", response.errorBody().toString())
               finish()
-              Toast.makeText(this@ProfileEditActivity, "프로필 수정 완료", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@ProfileEditActivity,
+                    "프로필 수정 완료!\n우측 상단의 버튼을 눌러 refresh해 주세요",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
               Log.e("PLZPLZPLZ", response.errorBody()!!.string())
               Toast.makeText(this@ProfileEditActivity, R.string.onSemiFailure, Toast.LENGTH_SHORT)

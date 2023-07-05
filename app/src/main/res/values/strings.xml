@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Week1</string>
+    <string name="app_name">몰입메이트</string>
     <string name="profile_fragment">Profile Fragment</string>
     <string name="gallery_fragment">Gallery Fragment</string>
     <string name="contacts_fragment">Contacts Fragment</string>
