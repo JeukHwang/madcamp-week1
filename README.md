@@ -2,7 +2,7 @@
 ## 1주차 프로젝트
 - **분반** : 3
 - **팀원** : 송민지, 황제욱
-- **프로젝트 이름**
+- **프로젝트 이름** : 몰입메이트
 - **프로젝트 설명**
 
   - **사용 tool** : Android Studio, NestJS, Prisma
@@ -39,8 +39,10 @@
       >
       >
       > 우측 상단의 세 가지 아이콘을 눌러 수행할 수 있는 기능은 다음과 같다.
-      > - 프로필을 수정하거나 Google이나 Github 계정과의 연동을 설정할 수 있다.
-      > - 프로필을 text 형태로 전송할 수 있다.
+      > - 기존에 작성한 프로필 정보를 수정할 수 있다.
+      > - 공유 버튼을 누를 시 "몰입메이트 앱에서 함께 프로필을 공유해 보아요."라는 text를 전송할 수 있다.
       > - 업데이트된 프로필 정보를 확인하고(refresh), 로그아웃(logout)할 수 있다.
-- 스크린샷 (3장 이상)
-- apk 파일
+- **스크린샷 (3장 이상)**
+![1](https://github.com/JeukHwang/madcamp-week1/assets/110910757/556ae64e-ca06-4648-b54f-25480bfc7d52)
+![2](https://github.com/JeukHwang/madcamp-week1/assets/110910757/70eaa046-6a45-4ef7-a4e0-3e359e120250)
+![3](https://github.com/JeukHwang/madcamp-week1/assets/110910757/ff7b77b2-e5d4-44fc-b25d-3fb17634fe4b)
