@@ -30,19 +30,17 @@ class DevelopFragment : Fragment() {
           startActivity(intent)
           true
         }
-        /*
-                R.id.share -> {
-                  R.id.shareInstagramBtn. shareInstagram()
-                  val intent = Intent(this.context, ProfileShareActivity::class.java)
-                  //                    val bundle = Bundle()
-                  //                    bundle.putString("info_photo", info.photo)
-                  //                    bundle.putString("info_id", info.id)
-                  //                    bundle.putString("info_email", info.email)
-                  //                    intent.putExtra("bundle_key", bundle)
-                  startActivity(intent)
-                  true
-                }
-         */
+
+        R.id.share -> {
+          val intent = Intent(this.context, ProfileShareActivity::class.java)
+          //                    val bundle = Bundle()
+          //                    bundle.putString("info_photo", info.photo)
+          //                    bundle.putString("info_id", info.id)
+          //                    bundle.putString("info_email", info.email)
+          //                    intent.putExtra("bundle_key", bundle)
+          startActivity(intent)
+          true
+        }
 
         else -> false
       }

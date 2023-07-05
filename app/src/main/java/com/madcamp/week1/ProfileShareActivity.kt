@@ -1,44 +1,41 @@
 package com.madcamp.week1
 
-import android.content.Context
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.madcamp.week1.databinding.ActivityProfileShareBinding
 
 
 class ProfileShareActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileShareBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileShareBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-        binding.toolbar.setNavigationOnClickListener { finish() }
 
-        binding.shareInstagramBtn.setOnClickListener { shareInstagram() }
+        // setup the alert builder
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("공유 옵션을 선택하세요")
 
-        binding.shareGithubBtn.setOnClickListener { shareGithub() }
+        // add a list
+        val animals = arrayOf("Instagram 계정 공유", "Github 계정 공유", "텍스트 공유")
+        builder.setItems(animals) { dialog, which ->
+            when (which) {
+                0 -> {
+                    shareInstagram()
+                }
 
-        binding.shareTextBtn.setOnClickListener { shareText() }
+                1 -> {
+                    shareGithub()
+                }
 
-        val sharedPref =
-            this@ProfileShareActivity.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE
-            )
-        with(sharedPref.edit()) {
-            putInt("settings", sharedPref.getInt("settings", -1) + 1)
-            apply()
+                2 -> {
+                    shareText()
+                }
+            }
         }
-        Toast.makeText(
-            this@ProfileShareActivity,
-            sharedPref.getInt("settings", -1).toString(),
-            Toast.LENGTH_SHORT
-        )
-            .show()
+
+        // create and show the alert dialog
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun shareInstagram() {

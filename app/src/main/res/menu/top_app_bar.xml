@@ -15,25 +15,6 @@
         android:icon="@drawable/baseline_share_24"
         android:title="share"
         app:showAsAction="ifRoom">
-        <menu>
-            <item
-                android:id="@+id/shareInstagramBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:title="Instagram 계정 공유" />
-
-            <item
-                android:id="@+id/shareGithubBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:title="Github 계정 공유" />
-
-            <item
-                android:id="@+id/shareTextBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:title="텍스트 공유" />
-        </menu>
     </item>
 
     <item
