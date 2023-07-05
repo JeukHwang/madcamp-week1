@@ -3,6 +3,7 @@ package com.madcamp.week1
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,6 +88,7 @@ class DevelopFragment : Fragment() {
           override fun onResponse(call: Call<UserProfile>, response: Response<UserProfile>) {
             if (response.isSuccessful) {
               userProfile = response.body()!!
+              Log.e("PLZ", userProfile.toString())
               updateProfile(userProfile)
             } else {
               Toast.makeText(activity, R.string.onSemiFailure, Toast.LENGTH_SHORT).show()

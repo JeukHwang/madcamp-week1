@@ -1,6 +1,9 @@
 package com.madcamp.week1.profile
 
+import android.content.Context
+import android.net.Uri
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -10,7 +13,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Url
 
 interface ServerAPIInterface {
@@ -20,6 +25,10 @@ interface ServerAPIInterface {
   @POST("/user/update") fun update(@Body params: RequestBody): Call<UserProfile>
   @GET fun getOne(@Url name: String): Call<UserProfile>
   @GET("/user/all") fun getAll(): Call<Array<UserProfile>>
+
+  @Multipart
+  @POST("/test/public-upload")
+  fun uploadImage(@Part file: MultipartBody.Part): Call<ImageUploadData>
 }
 
 class ServerApiClass {
@@ -106,5 +115,28 @@ class ServerApiClass {
       val call = getRetrofitService.getAll()
       call.enqueue(callback)
     }
+
+    fun uploadImage(
+        context: Context,
+        uri: Uri,
+        mimetype: String,
+        callback: Callback<ImageUploadData>
+    ) {
+      //      val file = File(absolutelyPath(uri, context))
+      //      var requestBody: RequestBody =
+      // file.asRequestBody("image/$mimetype".toMediaTypeOrNull())
+      val inputStream = context.contentResolver.openInputStream(uri)
+      val byteArray = inputStream?.readBytes()!!
+      val requestBody =
+          byteArray.toRequestBody("image/$mimetype".toMediaTypeOrNull(), 0, byteArray.size)
+      val body: MultipartBody.Part =
+          MultipartBody.Part.createFormData("file", uri.path, requestBody)
+      val call = getRetrofitService.uploadImage(body)
+      call.enqueue(callback)
+    }
   }
 }
+
+data class ImageUploadData(
+    val key: String,
+)
