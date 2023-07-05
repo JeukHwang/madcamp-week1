@@ -144,8 +144,8 @@ class GalleryCreateActivity : AppCompatActivity() {
                       Toast.LENGTH_LONG)
                   .show()
             }
-            Log.e("WOW2", response.body()?.toString()!!)
-            Log.e("WOW3", response.errorBody()?.string()!!)
+            //            Log.e("WOW2", response.body()?.toString()!!)
+            //            Log.e("WOW3", response.errorBody()?.string()!!)
           }
 
           override fun onFailure(call: Call<ImageUploadData>, t: Throwable) {

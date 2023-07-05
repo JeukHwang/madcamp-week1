@@ -75,26 +75,27 @@ class ImageGridFragment : Fragment() {
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-      val gridItem = GridItem.getData(position)
-      viewHolder.imageView.load(gridItem.photoUrl) {
+      val gridItem = dataset[position]
+      viewHolder.imageView.load(gridItem.photo) {
         placeholder(R.drawable.baseline_downloading_24)
         error(R.drawable.outline_error_outline_24)
         transformations(RoundedCornersTransformation(40F))
         crossfade(true)
       }
       viewHolder.itemView.setOnClickListener {
-        Toast.makeText(
-                this@ImageGridFragment.requireContext(),
-                "${gridItem.title} at position $position is clicked!",
-                Toast.LENGTH_SHORT)
-            .show()
+        //        Toast.makeText(
+        //                this@ImageGridFragment.requireContext(),
+        //                "${gridItem.title} at position $position is clicked!",
+        //                Toast.LENGTH_SHORT)
+        //            .show()
         // onItemClick(gridItem, viewHolder.imageView, viewHolder.textView)
 
         val intent = Intent(context, GalleryViewActivity::class.java)
-        val bundle = Bundle()
-
-        bundle.putString("info_photourl", gridItem.photoUrl)
-        intent.putExtra("bundle_key", bundle)
+        intent.putExtra("feedProfile", gridItem)
+        //        val bundle = Bundle()
+        //
+        //        bundle.putString("feedProfile", gridItem.photoUrl)
+        //        intent.putExtra("bundle_key", bundle)
         startActivity(intent)
       }
     }
@@ -125,7 +126,7 @@ class ImageGridFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<Array<FeedProfile>>, t: Throwable) {
-              Log.i("ACT", "?")
+              Log.i("ACT", t.message!!)
               Toast.makeText(activity, R.string.onFailure, Toast.LENGTH_SHORT).show()
             }
           })

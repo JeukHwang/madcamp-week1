@@ -3,12 +3,13 @@ package com.madcamp.week1
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import com.madcamp.week1.databinding.ActivityGalleryViewBinding
-import com.madcamp.week1.profile.UserProfile
+import com.madcamp.week1.profile.FeedProfile
 
 class GalleryViewActivity : AppCompatActivity() {
   private lateinit var binding: ActivityGalleryViewBinding
-  private lateinit var userProfile: UserProfile
+  private lateinit var feedProfile: FeedProfile
   private var photoUri: Uri? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +17,10 @@ class GalleryViewActivity : AppCompatActivity() {
     binding = ActivityGalleryViewBinding.inflate(layoutInflater)
     val view = binding.root
     setContentView(view)
+
+    feedProfile = intent.parcelable<FeedProfile>("feedProfile")!!
+    updateProfile(feedProfile)
+    binding.toolbar.setNavigationOnClickListener { this@GalleryViewActivity.finish() }
   }
   //
   //  private fun editUser(photoPath: String) {
@@ -115,4 +120,15 @@ class GalleryViewActivity : AppCompatActivity() {
   //          }
   //        })
   //  }
+
+  fun updateProfile(feedProfile: FeedProfile) {
+    binding.profilePhotoEdit.load(feedProfile.photo) {
+      placeholder(R.drawable.baseline_insert_photo_24)
+      error(R.drawable.baseline_insert_photo_24)
+      crossfade(500)
+    }
+    binding.textFieldAuthor.editText?.setText(feedProfile.authorName)
+    binding.textFieldName.editText?.setText(feedProfile.content)
+    binding.textFieldClass.editText?.setText(feedProfile.taggedUserName.toString())
+  }
 }

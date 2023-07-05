@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class FeedProfile(
     val id: String,
     val photo: String,
-    val content: Int,
+    val content: String,
     val authorName: String,
-    val taggedUserName: Array<String>,
+    val taggedUserName: List<String>,
 ) : Parcelable
