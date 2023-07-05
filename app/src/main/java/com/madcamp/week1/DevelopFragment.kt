@@ -63,6 +63,14 @@ class DevelopFragment : Fragment() {
               .setMessage(resources.getString(R.string.supporting_text))
               .setNegativeButton(resources.getString(R.string.decline)) { dialog, which -> }
               .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+                val sharedPref =
+                    activity?.getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE)!!
+                with(sharedPref.edit()) {
+                  putString("name", "")
+                  putString("password", "")
+                  apply()
+                }
                 val intent = Intent(this.context, LoginActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
