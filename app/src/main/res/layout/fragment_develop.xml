@@ -220,44 +220,6 @@
                         android:focusable="false" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="8dp"
-                    android:text="연동"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:text="연동을 통해 프로필을 더 쉽게 채워보세요"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/sync_google_button"
-                    style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="4dp"
-                    android:text="Google 연동하기"
-                    app:icon="@drawable/google_logo_24" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/sync_github_button"
-                    style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="4dp"
-                    android:text="Github 연동하기"
-                    app:icon="@drawable/github_logo_24" />
-
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
