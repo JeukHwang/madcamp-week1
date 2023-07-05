@@ -42,7 +42,8 @@
       > - 기존에 작성한 프로필 정보를 수정할 수 있다.
       > - 공유 버튼을 누를 시 "몰입메이트 앱에서 함께 프로필을 공유해 보아요."라는 text를 전송할 수 있다.
       > - 업데이트된 프로필 정보를 확인하고(refresh), 로그아웃(logout)할 수 있다.
-- **스크린샷 (3장 이상)**
+
+  - **스크린샷 (3장 이상)**
 ![1](https://github.com/JeukHwang/madcamp-week1/assets/110910757/556ae64e-ca06-4648-b54f-25480bfc7d52)
 ![2](https://github.com/JeukHwang/madcamp-week1/assets/110910757/70eaa046-6a45-4ef7-a4e0-3e359e120250)
 ![3](https://github.com/JeukHwang/madcamp-week1/assets/110910757/ff7b77b2-e5d4-44fc-b25d-3fb17634fe4b)
